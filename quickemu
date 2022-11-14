@@ -670,8 +670,8 @@ function vm_boot() {
 
   # Determine a sane resolution for Linux guests.
   if [ "${guest_os}" == "linux" ]; then
-    local X_RES=1152
-    local Y_RES=648
+    local X_RES=3200
+    local Y_RES=1800
     if [ "${XDG_SESSION_TYPE}" == "x11" ]; then
       local LOWEST_WIDTH=""
       if [ -z "${SCREEN}" ]; then
@@ -923,16 +923,6 @@ function vm_boot() {
   args+=(-device virtio-rng-pci,rng=rng0
          -object rng-random,id=rng0,filename=/dev/urandom
          -device ${USB_HOST_PASSTHROUGH_CONTROLLER},id=spicepass
-         -chardev spicevmc,id=usbredirchardev1,name=usbredir
-         -device usb-redir,chardev=usbredirchardev1,id=usbredirdev1
-         -chardev spicevmc,id=usbredirchardev2,name=usbredir
-         -device usb-redir,chardev=usbredirchardev2,id=usbredirdev2
-         -chardev spicevmc,id=usbredirchardev3,name=usbredir
-         -device usb-redir,chardev=usbredirchardev3,id=usbredirdev3
-         -device pci-ohci,id=smartpass
-         -device usb-ccid
-         -chardev spicevmc,id=ccid,name=smartcard
-         -device ccid-card-passthru,chardev=ccid
          )
 
   # setup usb-controller
@@ -1499,7 +1489,8 @@ EXTRA_ARGS=""
 
 # shellcheck disable=SC2155
 readonly LAUNCHER=$(basename "${0}")
-readonly DISK_MIN_SIZE=$((197632 * 8))
+#readonly DISK_MIN_SIZE=$((197632 * 8))
+readonly DISK_MIN_SIZE=720895
 readonly VERSION="4.4"
 
 # TODO: Make this run the native architecture binary
