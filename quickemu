@@ -312,7 +312,7 @@ function vm_boot() {
   local RAM_VM="2G"
   if [ -z "${ram}" ]; then
       local RAM_HOST=""
-      RAM_HOST=$(free --mega -h | grep Mem | cut -d':' -f2 | cut -d'G' -f1 | sed 's/ //g')
+      RAM_HOST=$(free -m -h | grep Mem | cut -d':' -f2 | cut -d'G' -f1 | sed 's/ //g')
       #Round up - https://github.com/wimpysworld/quickemu/issues/11
       RAM_HOST=$(printf '%.*f\n' 0 "${RAM_HOST}")
       if [ "${RAM_HOST}" -ge 128 ]; then

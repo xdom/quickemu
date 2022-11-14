@@ -618,7 +618,7 @@ function check_hash() {
     esac
 
     echo -n "Checking ${iso} with ${hash_algo}... "
-    if ! echo "${hash} ${iso}" | ${hash_algo} --check --status; then
+    if ! echo "${hash}  ${iso}" | ${hash_algo} -cs; then
         echo "ERROR!"
         echo "${iso} doesn't match ${hash}. Try running 'quickget' again."
         exit 1
